@@ -1,10 +1,9 @@
 const express = require('express');
-
 const morgan = require('morgan');
-const app = express();
-
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
+
+const app = express();
 
 // 1) Middlewares
 
@@ -12,9 +11,12 @@ const userRouter = require('./routes/userRoutes');
 //the data in the body is added to it
 
 //morgan
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 app.use(express.json());
+app.use(express.static(`${__dirname}/public`));
 
 app.use((req, res, next) => {
   console.log('hello from the middleware hiii');
@@ -26,7 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//changing the middleware stack
+//changing the middleware stack, this is the mounting process
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tours', tourRouter);
@@ -34,11 +36,6 @@ app.use('/api/v1/tours', tourRouter);
 //mounting the router
 
 // 4) Start Server
-const port = 5000;
-
-app.listen(port, () => {
-  console.log('listening on port');
-});
 
 /*
 app.get('/api/v1/tours', getAllTours);
@@ -47,3 +44,5 @@ app.post('/api/v1/tours', createTour);
 app.patch('/api/v1/tours/:id', updateTour);
 app.delete('/api/v1/tours/:id', deleteTour);
 */
+
+module.exports = app;

@@ -4,7 +4,8 @@
   "rules": {
     "prettier/prettier": "error",
     "spaced-comment": "off",
-    "no-console": "warn",
+    "no-console": "off",
+    //So here is the configurations you have added
     "consistent-return": "off",
     "func-names": "off",
     "object-shorthand": "off",
@@ -13,7 +14,8 @@
     "no-return-await": "off",
     "no-underscore-dangle": "off",
     "class-methods-use-this": "off",
-    "prefer-destructuring": ["error", { "object": true, "array": false }],
-    "no-unused-vars": ["error", { "argsIgnorePattern": "req|res|next|val" }]
+    "prefer-destructuring": ["off", { "object": true, "array": false }],
+    //so here we give an error if we dont use a variable, except  for the standard response variables
+    "no-unused-vars": ["off", { "argsIgnorePattern": "req|res|next|val" }]
   }
 }

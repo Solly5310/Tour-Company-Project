@@ -1,33 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const userController = require(`${__dirname}/../controllers/userController`);
 
-const getAllUsers = (req, res) => {
-  console.log('Hello');
-  res.status(200).json({ status: 'success' });
-};
+router
+  .route('/')
+  .get(userController.getAllUsers)
+  .post(userController.createUser);
 
-const createUser = (req, res) => {
-  console.log('yep');
-  res.status(200).json({ status: 'success' });
-};
-
-const getUser = (req, res) => {
-  console.log('yep');
-  res.status(200).json({ status: 'success' });
-};
-
-const updateUser = (req, res) => {
-  console.log('yep');
-  res.status(200).json({ status: 'success' });
-};
-
-const deleteUser = (req, res) => {
-  console.log('yep');
-  res.status(200).json({ status: 'success' });
-};
-
-router.route('/').get(getAllUsers).post(createUser);
-
-router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
+router
+  .route('/:id')
+  .get(userController.getUser)
+  .patch(userController.updateUser)
+  .delete(userController.deleteUser);
 
 module.exports = router;
